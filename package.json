@@ -1,0 +1,29 @@
+{
+  "name": "@swatk6/packetqueue",
+  "version": "1.0.0",
+  "description": "A packet queue manager with layer-agnostic features.",
+  "main": "index.js",
+  "scripts": {
+    "test": "node test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/subpardaemon/swatk6-packetqueue.git",
+    "web": "https://github.com/subpardaemon/swatk6-packetqueue/tree/master"
+  },
+  "keywords": [
+    "packet",
+    "queue",
+    "timer",
+    "network",
+    "layer-agnostic"
+  ],
+  "author": "Andras Kemeny <subpardaemon@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/subpardaemon/swatk6-packetqueue/issues"
+  },
+  "dependencies": {
+    "@swatk6/packet": "^1.0.1"
+  }
+}
