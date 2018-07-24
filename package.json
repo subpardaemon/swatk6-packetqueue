@@ -23,7 +23,13 @@
   "bugs": {
     "url": "https://github.com/subpardaemon/swatk6-packetqueue/issues"
   },
-  "dependencies": {
-    "@swatk6/packet": "^1.0.1"
+  "dependencies": {"@swatk6\/packet":"^1.0.1",
+    "@swatk6/packet": "^1.1.1"
+  },
+  "devDependencies": {
+    "@swatk6/tester": "^1.1.0"
+  },
+  "optionalDependencies": {
+    "@swatk6/logger": "^1.5.0"
   }
 }

@@ -1,15 +1,16 @@
 /**
- * TODO
+ * swatk6/packetqueue
+ * @version v1.0.0
+ * @author Andras Kemeny
+ * 
+ * A packet queue manager with layer-agnostic features, uses @swatk6/packet.
  * 
  * LICENSE: MIT
  * (c) Andras Kemeny, subpardaemon@gmail.com
- * 
+ */
 
-
-if (typeof module!=='undefined' && typeof module.exports!=='undefined') {
-	/** @type {swatk6_packet} */
-	var swatk6_packet = require('./swatk6_packet.js');
-}
+/** @type {swatk6_packet} */
+var swatk6_packet = require('./swatk6_packet.js');
 
 function swatk6_packetqueue(opts) {
     this.options = {
@@ -47,15 +48,20 @@ function swatk6_packetqueue(opts) {
     this.inttimer = null;
     this._runner();
 }
-swatk6_packetqueue.version = 1;
+swatk6_packetqueue.version = '1.0.0';
 swatk6_packetqueue.prototype.brand = function(packet) {
     packet.seqid = this.options.origin+packet.seqid;
     return packet;
 };
-swatk6_packetqueue.prototype.inspect = function() {
+swatk6_packetqueue.prototype.toString = function() {
+    var out = '';
     for(var i=0;i<this.packetq.length;i++) {
-	this._log('info','state: '+this.packetq[i]._commdata.sendstate+', seqid: '+this.packetq[i].seqid+', cmd: '+this.packetq[i].command+', last: '+this.packetq[i]._commdata.lastsent+', type: '+this.packetq[i].options.type);
+	out += 'state['+i.toString()+']: '+this.packetq[i]._commdata.sendstate+', seqid: '+this.packetq[i].seqid+', cmd: '+this.packetq[i].command+', last: '+this.packetq[i]._commdata.lastsent+', type: '+this.packetq[i].options.type+"\n";
     }
+    return out;
+};
+swatk6_packetqueue.prototype.inspect = function() {
+    this._log('info',this.toString());
 };
 /**
  * Send a packet from the queue.
@@ -386,7 +392,7 @@ swatk6_packetqueue.prototype._log = function(level) {
     for(var i = 0; i < params.length; ++i) {
         params[i] = arguments[i];
     }
-    params[0] = 'PACKETQUEUE';
+    params[0] = 'PACKETQUEUE@'+this.options.origin;
     if (this.options.logger!==null) {
 	this.options.logger[level].apply(this.options.logger,params);
     } else {
@@ -395,6 +401,4 @@ swatk6_packetqueue.prototype._log = function(level) {
 };
 
 
-if (typeof module!=='undefined' && typeof module.exports!=='undefined') {
-    module.exports = swatk6_packetqueue;
-}
+module.exports = swatk6_packetqueue;
